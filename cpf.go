@@ -8,12 +8,14 @@ func IsCPF(cpf string) bool {
 	return err == nil
 }
 
+var errInvalidCPF = errors.New("invalid CPF")
+
 // CanonicalCPF verifies if a CPF is valid and returns
 // the canonical CPF form (without "." or "-") or error.
 func CanonicalCPF(cpf string) (string, error) {
 	cpf = removeNotDigits(cpf)
 	if !isValidCPF(cpf) {
-		return "", errors.New("invalid CPF")
+		return "", errInvalidCPF
 	}
 	return cpf, nil
 }
